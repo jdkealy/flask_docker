@@ -2,10 +2,15 @@ version: '3'
 services:
   tf:
     container_name: angelawhite
+    environment:
+      - SHELL=/bin/bash
+      - COLUMNS=150
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - 5000:5000
+
     volumes:
+      - ./:/app
       - .:/notebooks
