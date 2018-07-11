@@ -11,4 +11,3 @@ Pillow
 scikit-learn
 tensorflow
 prettytensor
-gym[atari]
