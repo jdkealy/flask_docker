@@ -7,4 +7,4 @@ COPY . /app
 WORKDIR /app
 ENV FLASK_DEBUG 1
 ENV FLASK_APP hello.py
-CMD ["flask", "run"]
+CMD ["python", "hello.py"]
