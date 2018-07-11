@@ -5,6 +5,4 @@ COPY requirements.txt /
 RUN pip install -r /requirements.txt
 COPY . /app
 WORKDIR /app
-ENV FLASK_DEBUG 1
-ENV FLASK_APP hello.py
 CMD ["python", "hello.py"]
