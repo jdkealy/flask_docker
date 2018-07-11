@@ -1,6 +1,8 @@
 FROM python:3.6
+RUN mkdir data
+ADD ./data data
+COPY requirements.txt /
 ENV OPENCV_VERSION 3.2.0
-
 RUN apt-get update
 RUN apt-get install vim -y
 RUN apt-get update && \
@@ -45,3 +47,4 @@ RUN wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip \
 && make install \
 && rm /${OPENCV_VERSION}.zip \
 && rm -r /opencv-${OPENCV_VERSION}
+RUN pip install -r /baseRequirements.txt
