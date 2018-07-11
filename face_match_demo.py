@@ -5,7 +5,6 @@ from align import detect_face
 import cv2
 import argparse
 
-print("HELLO WORLD")
 parser = argparse.ArgumentParser()
 parser.add_argument("--img1", type = str, required=True)
 parser.add_argument("--img2", type = str, required=True)
@@ -66,7 +65,6 @@ def compare2face(img1,img2):
     return -1
 
 
-println("HI")
 img1 = cv2.imread(args.img1)
 img2 = cv2.imread(args.img2)
 

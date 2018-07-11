@@ -5,6 +5,7 @@ import cv2
 import imutils
 import numpy as np
 import argparse
+import requests
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--img", type = str, required=True)
@@ -30,6 +31,12 @@ embeddings = tf.get_default_graph().get_tensor_by_name("embeddings:0")
 phase_train_placeholder = tf.get_default_graph().get_tensor_by_name("phase_train:0")
 embedding_size = embeddings.get_shape()[1]
 
+def getImg(url):
+    filename = url.split('/')[-1]
+    r = requests.get(url, allow_redirects=True)
+    open(filename, 'wb').write(r.content)
+
+
 def getFace(img):
     faces = []
     img_size = np.asarray(img.shape)[0:2]
@@ -46,7 +53,9 @@ def getFace(img):
                 cropped = img[bb[1]:bb[3], bb[0]:bb[2], :]
                 resized = cv2.resize(cropped, (input_image_size,input_image_size),interpolation=cv2.INTER_CUBIC)
                 prewhitened = facenet.prewhiten(resized)
-                faces.append({'face':resized,'rect':[bb[0],bb[1],bb[2],bb[3]],'embedding':getEmbedding(prewhitened)})
+                faces.append({'face':resized,
+                              'rect':[bb[0],bb[1],bb[2],bb[3]],
+                              'embedding':getEmbedding(prewhitened)})
     return faces
 
 def getEmbedding(resized):
@@ -60,6 +69,7 @@ img = cv2.imread(args.img)
 img = imutils.resize(img,width=1000)
 faces = getFace(img)
 for face in faces:
+    print("Rect = "+str(face['rect']))
     print("Embeddings = "+str(face['embedding']))
 cv2.waitKey(0)
 cv2.destroyAllWindows()

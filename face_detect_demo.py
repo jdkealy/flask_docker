@@ -6,7 +6,6 @@ import numpy as np
 import argparse
 
 
-print("HELLO WORLD")
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--img", type = str, required=True)
