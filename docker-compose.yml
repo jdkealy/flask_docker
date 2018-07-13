@@ -3,7 +3,7 @@ services:
   tf:
     container_name: angelawhite
     environment:
-      - "DISPLAY=${EXTERNAL_IP}:0"
+      - "DISPLAY=${IP}:0"
       - QT_X11_NO_MITSHM=1
       - SHELL=/bin/bash
       - COLUMNS=150
